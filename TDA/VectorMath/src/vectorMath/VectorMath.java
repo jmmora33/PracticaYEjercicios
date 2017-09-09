@@ -60,10 +60,11 @@ public class VectorMath {
 	{
 		return this.vec.length;
 	}
-	public double Modulo(){
+	
+	public double ModuloN(int n){
 		double aux=0;
 		for (int i = 0; i < vec.length; i++) {
-			aux+=Math.pow(vec[i],2);
+			aux+=Math.pow(vec[i],n);
 		}
 		Math.sqrt(aux);
 		return aux;

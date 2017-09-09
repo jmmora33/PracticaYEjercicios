@@ -7,23 +7,56 @@ import java.util.Scanner;
 public class MatrizMath {
 	
 	private double [][] mat;
+	private Scanner sc;
 	
 	public MatrizMath(String path) throws FileNotFoundException
 	{
-		Scanner sc = new Scanner(new File(path));
+	    this.sc = new Scanner(new File(path));
 		mat = new double[sc.nextInt()][sc.nextInt()];
 	}
 	
 	public MatrizMath(int f,int c) {
 		mat = new double[f][c];
 	}
-
-	public MatrizMath ProductoMatricial(MatrizMath mat1)
-	{
-		MatrizMath mat2 = new MatrizMath(mat[0].length,mat.length);
-		
+    
 	
-		return mat2;
+	
+	public double[][] getMat() {
+		return mat;
+	}
+
+	public void setMat(double[][] mat) {
+		this.mat = mat;
+	}
+
+	public double obtenerValor(int numFila, int numCol) {
+		return this.getMat()[numFila-1][numCol-1];
+	}
+	
+	public void setearValor(int numFila, int numCol, double valor) {
+		this.mat[numFila -1][numCol -1] = valor;
+	}
+	
+	public VectorMath obtenerFila(int index) {
+		VectorMath resultado = new VectorMath(this.getDimensionColumna());
+		resultado.setVec(this.getMat()[index]);
+		return resultado;
+	}
+	
+	public MatrizMath ProductoMatricial(MatrizMath mat1){
+		MatrizMath resultado = new MatrizMath(this.getDimensionFila(), mat1.getDimensionColumna());
+		
+		for (int i = 0; i < resultado.getDimensionFila(); i++) {
+			for (int j = 0; j < resultado.getDimensionColumna(); j++) {
+				double acumulador = 0;
+				for(int ciclo = 0; ciclo <resultado.getDimensionColumna(); ciclo ++)
+					 acumulador += this.obtenerValor(j, ciclo) * mat1.obtenerValor(ciclo, j);
+					resultado.setearValor(i, j, acumulador);
+				
+			}
+		}
+	
+		return resultado;
 	}
 	
    public int getDimensionFila()
