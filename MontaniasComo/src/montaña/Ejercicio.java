@@ -9,10 +9,10 @@ public class Ejercicio {
 public static void main(String[] args) throws FileNotFoundException{
 	
 	Montaña montaña = new Montaña();
-	Scanner sc = new Scanner(new File("Archivo.in"));
+	Scanner sc = new Scanner(new File(".\\Entradas\\01_QueleaBienArchivo.in"));
 	int[] coordenadasY;
 	montaña.setCantCambios(sc.nextInt());
-	coordenadasY = new int[montaña.getCantCambios()];
+	coordenadasY = new int[montaña.getCantCambios()+1];
 	
 	for (int i = 0; i < coordenadasY.length; i++) 
 		coordenadasY[i] = sc.nextInt();
@@ -20,7 +20,7 @@ public static void main(String[] args) throws FileNotFoundException{
 	montaña.setCoordenadasY(coordenadasY);
 	sc.close();
 	
-	System.out.println(montaña.mover() +" "+ montaña.getCapacidadCarro());
+	System.out.println(montaña.mover() +" "+ montaña.getValorYFinal());
 }
 
 

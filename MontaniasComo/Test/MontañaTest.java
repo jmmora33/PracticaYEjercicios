@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+
 
 import java.io.FileNotFoundException;
 
@@ -11,7 +11,7 @@ import montaña.Montaña;
 public class MontañaTest {
 	Archivo archivo;
 	Montaña montaña;
-	String miPathEntrada = "Archivo.in";
+	
 	@Before
 	public void setUp(){
 		archivo = new Archivo();
@@ -20,10 +20,18 @@ public class MontañaTest {
 	
 	
 	@Test
-	public void queLeaBienElArchivo() throws FileNotFoundException{
-		montaña = archivo.leerArchivo(miPathEntrada);
+	public void queSeMuevaDeFormaCorrecta() throws FileNotFoundException{
+		montaña = archivo.leerArchivo("Archivo.in");
 		
 		Assert.assertEquals(montaña.mover(),167);
 		
+	}
+	
+	@Test
+	public void queLeaCorrectamenteElArchivo() throws FileNotFoundException{
+		
+		montaña = archivo.leerArchivo(".\\Entradas\\01_QueleaBienArchivo.in");
+
+		Assert.assertEquals(montaña.mover() ,97);
 	}
 }
