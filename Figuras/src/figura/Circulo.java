@@ -2,18 +2,7 @@ package figura;
 
 public class Circulo {
 	
-	private double radio;
-	private Punto centro;
 	
-	public Circulo() {
-		this.centro = new Punto(0,0);
-		this.radio=0;
-	}
-	
-	public Circulo(double x, double y, double radio) {
-		this.centro = new Punto(x,y);
-		this.radio = radio;
-	}
 	
 
 	public boolean estaAdentro(Punto p) {
@@ -26,13 +15,13 @@ public class Circulo {
 	
 	//TODO
 	public boolean intersectaCon(Rectangulo that) {
-		Rectangulo rec = generarRec(this);
 		
-		if(rec.intersectaCon(that) && ) {
-			
-		}
-		else
-			return false;
+//		return (that.getV2().getDistanciaY(that.getV2().getY())- this.getCentro().getY() <= this.getRadio() && that.getV2().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio()) ||
+//			(that.getV1().getDistanciaY(that.getV2().getY()) - this.getCentro().getY() <= this.getRadio() && that.getV1().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio());
+//	
+		
+		
+		return true; 
 	}
 	
 	public Rectangulo generarRec (Circulo that) {
@@ -49,5 +38,34 @@ public class Circulo {
 		Rectangulo rec = new Rectangulo(p1,p2);
 		return rec;
 	}
+
+	
+	public double getRadio() {
+		return radio;
+	}
+
+	public void setRadio(double radio) {
+		this.radio = radio;
+	}
+
+	public Punto getCentro() {
+		return centro;
+	}
+
+	public void setCentro(Punto centro) {
+		this.centro = centro;
+	}
+	
+	public Circulo() {
+		this.centro = new Punto(0,0);
+		this.radio=0;
+	}
+	
+	public Circulo(double x, double y, double radio) {
+		this.centro = new Punto(x,y);
+		this.radio = radio;
+	}
+	private double radio;
+	private Punto centro;
 	
 }

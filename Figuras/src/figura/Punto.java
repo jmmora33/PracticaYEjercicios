@@ -24,6 +24,16 @@ public  class Punto {
 		this.y = y;
 	}
 	
+	public double getDistanciaX(double valor) {
+		
+		return Math.abs(this.getX()-valor);
+	}
+	
+	public double getDistanciaY(double valor) {
+		
+		return Math.abs(this.getY()-valor);
+	}
+	
 	public double distanciaCon(Punto that) {
 		return Math.sqrt(Math.pow(this.x-that.x, 2)+Math.pow(this.y-that.y, 2));
 	}

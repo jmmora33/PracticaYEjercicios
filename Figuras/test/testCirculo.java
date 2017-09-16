@@ -17,8 +17,8 @@ public class testCirculo {
 	public void before() {
 		circulo1 = new Circulo(1,1,1);
 		circulo2 = new Circulo(2,2,2);
-		p1 = new Punto(2,3);
-		p2 = new Punto(5,1);
+		p1 = new Punto(1,0);
+		p2 = new Punto(4,4);
 		rectangulo1 = new Rectangulo(p1,p2);
 		p1 = new Punto(3,7);
 		p2 = new Punto(7,2);
@@ -39,6 +39,11 @@ public class testCirculo {
 		
 	}
 	
+	 @Test 
+	 public void queDetecteInterseccionConFigura() {
+		 assertTrue(circulo1.intersectaCon(rectangulo1));
+		 assertTrue(circulo2.intersectaCon(rectangulo2));
+	 }
 	
 	
 }

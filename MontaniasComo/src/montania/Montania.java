@@ -1,8 +1,8 @@
-package montaña;
+package montania;
 
 import java.util.Arrays;
 
-public class Montaña {
+public class Montania {
 
 
 	
