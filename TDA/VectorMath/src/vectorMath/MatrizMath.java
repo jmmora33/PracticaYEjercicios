@@ -6,28 +6,7 @@ import java.util.Scanner;
 
 public class MatrizMath {
 	
-	private double [][] mat;
-	private Scanner sc;
-	
-	public MatrizMath(String path) throws FileNotFoundException
-	{
-	    this.sc = new Scanner(new File(path));
-		mat = new double[sc.nextInt()][sc.nextInt()];
-	}
-	
-	public MatrizMath(int f,int c) {
-		mat = new double[f][c];
-	}
-    
-	
-	
-	public double[][] getMat() {
-		return mat;
-	}
 
-	public void setMat(double[][] mat) {
-		this.mat = mat;
-	}
 
 	public double obtenerValor(int numFila, int numCol) {
 		return this.getMat()[numFila-1][numCol-1];
@@ -58,6 +37,26 @@ public class MatrizMath {
 	
 		return resultado;
 	}
+	///TESTEAR
+	 public static MatrizMath traspuesta(MatrizMath matriz){
+	        MatrizMath resultado=new MatrizMath(matriz.getDimensionColumna(),matriz.getDimensionFila());
+	        for(int i = 0; i< matriz.getDimensionFila(); i++){
+	            for(int j=0; j < matriz.getDimensionColumna(); j++){
+	                resultado.setearValor(i, j,  matriz.getMat()[j][i]);
+	            }
+	        }
+	        return resultado;
+	    }
+	///Testear
+	//Se denomina traza a la suma de los elementos de su diagonal principal.
+	public double traza(){
+	        double tr=0.0;
+	        if(this.getDimensionFila() == this.getDimensionColumna())
+	        for(int i=0; i < this.getDimensionFila(); i++){
+	            tr += this.getMat()[i][i];
+	        }
+	        return tr;
+	    }
 	
    public int getDimensionFila()
    {
@@ -69,4 +68,28 @@ public class MatrizMath {
    {
 	   return this.mat.length;
    }
+	
+	public MatrizMath(String path) throws FileNotFoundException
+	{
+	    this.sc = new Scanner(new File(path));
+		mat = new double[sc.nextInt()][sc.nextInt()];
+	}
+	
+	public MatrizMath(int f,int c) {
+		mat = new double[f][c];
+	}
+   
+	
+	
+	public double[][] getMat() {
+		return mat;
+	}
+
+	public void setMat(double[][] mat) {
+		this.mat = mat;
+	}
+
+	private double [][] mat;
+	private Scanner sc;
+
 }

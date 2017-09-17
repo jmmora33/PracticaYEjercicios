@@ -24,6 +24,15 @@ public class Rectangulo {
 
 	public void setV2(Punto v2) {
 		this.v2 = v2;
+	}		
+	
+	public Punto getPunto3() {
+		
+		return new Punto(this.getV2().getX(),this.getV1().getY()); 
+	}
+	public Punto getPunto4() {
+		
+		return new Punto(this.getV1().getX(),this.getV2().getY()); 
 	}
 	//v1 mas arriba y a la izq, v2 mas abajo y a la derecha
 	public boolean intersectaCon(Rectangulo that) {

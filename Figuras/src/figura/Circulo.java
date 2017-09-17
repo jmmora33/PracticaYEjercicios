@@ -16,30 +16,25 @@ public class Circulo {
 	//TODO
 	public boolean intersectaCon(Rectangulo that) {
 		
+		Punto puntoN = new Punto(this.getCentro().getX(),this.getCentro().getY() +radio);
+		Punto puntoS = new Punto(this.getCentro().getX(),this.getCentro().getY() -radio);
+		Punto puntoE = new Punto(this.getCentro().getX() + radio,this.getCentro().getY());
+		Punto puntoO = new Punto(this.getCentro().getX() - radio,this.getCentro().getY() );
 //		return (that.getV2().getDistanciaY(that.getV2().getY())- this.getCentro().getY() <= this.getRadio() && that.getV2().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio()) ||
 //			(that.getV1().getDistanciaY(that.getV2().getY()) - this.getCentro().getY() <= this.getRadio() && that.getV1().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio());
-//	
+//	PARA ESTE Y OESTE
+		if(this.getCentro().getX() <= that.getV2().getX() && this.getCentro().getX() >= that.getV1().getX() &&
+				this.getCentro().getY() >= that.getV2().getY() && this.getCentro().getY() <= that.getV1().getY()	)	
+				return true ;  
 		
-		
-		return true; 
+		return false;		
+				
 	}
-	
-	public Rectangulo generarRec (Circulo that) {
+	public boolean esMenor(Punto p1, Punto p2, int distancia) {
 		
-		double x1 = that.centro.x - that.radio;
-		double y1 = that.centro.y + that.radio;
 		
-		Punto p1 = new Punto(x1,y1);
-		
-		double x2 = that.centro.x + that.radio;
-		double y2 = that.centro.y - that.radio;
-		
-		Punto p2 = new Punto(x2,y2);
-		Rectangulo rec = new Rectangulo(p1,p2);
-		return rec;
+		return p1.getDistanciaX(p2.getX()) <= distancia && p1.getDistanciaY(p2.getY()) <= distancia;
 	}
-
-	
 	public double getRadio() {
 		return radio;
 	}
