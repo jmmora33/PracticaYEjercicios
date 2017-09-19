@@ -6,6 +6,7 @@ import org.junit.Test;
 import figura.Circulo;
 import figura.Punto;
 import figura.Rectangulo;
+import figura.Triangulo;
 
 public class testCirculo {
 
@@ -24,7 +25,14 @@ public class testCirculo {
 		p2 = new Punto(7,2);
 		rectangulo2 = new Rectangulo(p1,p2);
 	}
+	@Test
+	public void queEncuentreLaFiguraQueQuiereIntersectar(){
+		
+	Triangulo triangulo = new Triangulo();
 	
+	 circulo1.intersectaCon(triangulo);
+	
+	}
 	@Test
 	public void circuloTest() {
 		
@@ -36,14 +44,16 @@ public class testCirculo {
 	}
 	 @Test
 	public void rectanguloTest() {
-		
+		Rectangulo otroRectangulo = new Rectangulo(new Punto(6,-6), new Punto(4,2));
+		assertTrue(otroRectangulo.intersectaCon(rectangulo2));
+		System.out.println(otroRectangulo.getV1());
 	}
 	
-	 @Test 
-	 public void queDetecteInterseccionConFigura() {
-		 assertTrue(circulo1.intersectaCon(rectangulo1));
-		 assertTrue(circulo2.intersectaCon(rectangulo2));
-	 }
-	
+//	 @Test 
+//	 public void queDetecteInterseccionConFigura() {
+//		 assertTrue(circulo1.intersectaCon(rectangulo1));
+//		 assertTrue(circulo2.intersectaCon(rectangulo2));
+//	 }
+//	
 	
 }

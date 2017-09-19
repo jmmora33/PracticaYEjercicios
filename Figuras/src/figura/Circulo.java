@@ -1,6 +1,6 @@
 package figura;
 
-public class Circulo {
+public class Circulo extends Figura{
 	
 	
 	
@@ -9,27 +9,51 @@ public class Circulo {
 		return p.distanciaCon(this.centro) <= this.radio;
 	}
 	
-	public boolean intersectaCon(Circulo that) {
+	private boolean intersectaConCir(Circulo that) {
 		return this.centro.distanciaCon(that.centro)<=(this.radio+that.radio);
 	}
-	
-	//TODO
-	public boolean intersectaCon(Rectangulo that) {
-		
-		Punto puntoN = new Punto(this.getCentro().getX(),this.getCentro().getY() +radio);
-		Punto puntoS = new Punto(this.getCentro().getX(),this.getCentro().getY() -radio);
-		Punto puntoE = new Punto(this.getCentro().getX() + radio,this.getCentro().getY());
-		Punto puntoO = new Punto(this.getCentro().getX() - radio,this.getCentro().getY() );
-//		return (that.getV2().getDistanciaY(that.getV2().getY())- this.getCentro().getY() <= this.getRadio() && that.getV2().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio()) ||
-//			(that.getV1().getDistanciaY(that.getV2().getY()) - this.getCentro().getY() <= this.getRadio() && that.getV1().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio());
-//	PARA ESTE Y OESTE
-		if(this.getCentro().getX() <= that.getV2().getX() && this.getCentro().getX() >= that.getV1().getX() &&
-				this.getCentro().getY() >= that.getV2().getY() && this.getCentro().getY() <= that.getV1().getY()	)	
-				return true ;  
-		
-		return false;		
-				
+	private boolean intersectaConTri(Triangulo tri){
+		System.out.println("Soy un triangulo");
+		return true;
 	}
+	
+	private boolean intersectaConRec(Rectangulo that) {
+		
+//		Punto puntoN = new Punto(this.getCentro().getX(),this.getCentro().getY() +radio);
+//		Punto puntoS = new Punto(this.getCentro().getX(),this.getCentro().getY() -radio);
+//		Punto puntoE = new Punto(this.getCentro().getX() + radio,this.getCentro().getY());
+//		Punto puntoO = new Punto(this.getCentro().getX() - radio,this.getCentro().getY() );
+//		
+	return (that.getV2().getDistanciaY(that.getV2().getY())- this.getCentro().getY() <= this.getRadio() && that.getV2().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio()) ||
+	(that.getV1().getDistanciaY(that.getV2().getY()) - this.getCentro().getY() <= this.getRadio() && that.getV1().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio());
+
+
+	}
+	@Override
+	public boolean intersectaCon(Figura figura) {
+
+		if(figura.getClass() == this.getClass())
+			return intersectaConCir((Circulo)figura);
+		
+		if(figura.getClass() == Triangulo.class)
+			return intersectaConTri((Triangulo)figura);
+		
+		return false;
+	}
+
+	@Override
+	public double area() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double perimetro() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+
 	public boolean esMenor(Punto p1, Punto p2, int distancia) {
 		
 		
@@ -62,5 +86,5 @@ public class Circulo {
 	}
 	private double radio;
 	private Punto centro;
-	
+
 }
