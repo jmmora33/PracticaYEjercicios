@@ -1,5 +1,7 @@
 package figura;
 
+import javax.naming.directory.InvalidAttributesException;
+
 public class Triangulo extends Figura{
     
 
@@ -11,6 +13,9 @@ public class Triangulo extends Figura{
 		if(figura.getClass() == this.getClass())
 			return intersectaConTri((Triangulo) figura);
 			
+		if(figura.getClass() == Rectangulo.class)
+			return intersectaConRect((Rectangulo) figura);
+		
 		
 			
 		
@@ -29,15 +34,17 @@ public class Triangulo extends Figura{
 	}
     
 	public boolean intersectaConTri(Triangulo tri){
-		
+		System.out.println("SOY UN TRIANGULO MAN");
 	return true;
 	}
-	public boolean intersectaConRect(Triangulo tri){
-		
-		return true;
-	}
-	public boolean intersectaConCirc(Triangulo tri){
 	
+	
+	public boolean intersectaConRect(Rectangulo that){
+		return this.getPunto1().distanciaCon(that.getV1()) <= this.getAltura() && 
+			this.getPunto2().distanciaCon(that.getV2())<=this.getBase();
+	}
+	public boolean intersectaConCirc(Circulo that){
+		System.out.println("SOY UN CIRCULO MAN");
 	return true;
 	}
 	public double getBase(){
@@ -115,15 +122,18 @@ public class Triangulo extends Figura{
 		return true;
 	}
 
-	public Triangulo(Punto punto1, Punto punto2, Punto punto3) {
+	public Triangulo(Punto punto1, Punto punto2, Punto punto3) throws InvalidAttributesException {
 		super();
+		//if(punto1.equals(punto2) || punto1.equals(punto3) || punto2.equals(punto2))
+		//	throw new InvalidAttributesException("No es posible construir un triangulo con dos puntos iguales"); 
+		
 		this.punto1 = punto1;
 		this.punto2 = punto2;
 		this.punto3 = punto3;
 	}
 	
-	public Triangulo(){
-	this(new Punto(0,0),new Punto(0,0),new Punto(0,0));
+	public Triangulo() throws InvalidAttributesException{
+	this(new Punto(0,0),new Punto(1,1),new Punto(-1,1));
 	}
 
 	public Punto getPunto1() {

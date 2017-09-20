@@ -2,32 +2,29 @@ package figura;
 
 public class Circulo extends Figura{
 	
-	
-	
 
 	public boolean estaAdentro(Punto p) {
 		return p.distanciaCon(this.centro) <= this.radio;
 	}
 	
+	
+	public boolean estaContenido(Rectangulo that){
+		
+		return this.getCentro().getX() <= that.getV2().getX() && this.getCentro().getX() >= that.getV1().getX()
+				&& this.getCentro().getY() >= that.getV2().getY() && this.getCentro().getY() <= that.getV1().getY();
+	}
+	
+	private boolean intersectaConRec(Rectangulo that) {
+		
+			return this.estaAdentro(that.getV1()) || this.estaAdentro(that.getV2()) || 
+				   this.estaAdentro(that.getPunto3())|| this.estaAdentro(that.getPunto4()) || this.estaContenido(that); 
+	}
 	private boolean intersectaConCir(Circulo that) {
 		return this.centro.distanciaCon(that.centro)<=(this.radio+that.radio);
 	}
 	private boolean intersectaConTri(Triangulo tri){
 		System.out.println("Soy un triangulo");
 		return true;
-	}
-	
-	private boolean intersectaConRec(Rectangulo that) {
-		
-//		Punto puntoN = new Punto(this.getCentro().getX(),this.getCentro().getY() +radio);
-//		Punto puntoS = new Punto(this.getCentro().getX(),this.getCentro().getY() -radio);
-//		Punto puntoE = new Punto(this.getCentro().getX() + radio,this.getCentro().getY());
-//		Punto puntoO = new Punto(this.getCentro().getX() - radio,this.getCentro().getY() );
-//		
-	return (that.getV2().getDistanciaY(that.getV2().getY())- this.getCentro().getY() <= this.getRadio() && that.getV2().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio()) ||
-	(that.getV1().getDistanciaY(that.getV2().getY()) - this.getCentro().getY() <= this.getRadio() && that.getV1().getDistanciaX(that.getV1().getX()) -this.getCentro().getY() <= this.getRadio());
-
-
 	}
 	@Override
 	public boolean intersectaCon(Figura figura) {
@@ -38,27 +35,25 @@ public class Circulo extends Figura{
 		if(figura.getClass() == Triangulo.class)
 			return intersectaConTri((Triangulo)figura);
 		
+		if(figura.getClass() == Rectangulo.class)
+			return intersectaConRec((Rectangulo)figura);
+		
 		return false;
 	}
 
 	@Override
 	public double area() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Math.PI * Math.pow(radio, 2);
 	}
 
 	@Override
 	public double perimetro() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return  2*Math.PI*radio;
 	}
 	
 
-	public boolean esMenor(Punto p1, Punto p2, int distancia) {
-		
-		
-		return p1.getDistanciaX(p2.getX()) <= distancia && p1.getDistanciaY(p2.getY()) <= distancia;
-	}
+
 	public double getRadio() {
 		return radio;
 	}

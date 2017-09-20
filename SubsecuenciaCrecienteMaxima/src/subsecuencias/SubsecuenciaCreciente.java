@@ -10,7 +10,7 @@ public class SubsecuenciaCreciente {
         int posicion = -1;
 		
 		for(int i = 0; i < secuencia.length-1 ; i++){
-			creciente = 1;
+			creciente = 0;
 			secuenciasMaximas[i][i] = creciente;
 			for (int j = 1 + i, ultPos = 0; j < secuencia.length; j++) {
 				if(secuencia[ultPos] < secuencia[j]){
