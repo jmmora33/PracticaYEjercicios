@@ -2,17 +2,20 @@ package monticulo;
 
 import java.util.ArrayList;
 
-public class MonticuloDin {
 
-	public boolean agregar(Nodo valor){		
+@SuppressWarnings("rawtypes")
+public class MonticuloGen<T extends Comparable> {
+
+	public boolean agregar(T valor){		
 	this.ingresarValor(valor);
 		reordenarInsert();
 		
 		return true;
 	}
 
+@SuppressWarnings("unchecked")
 public void reordenarInsert(){
-	Nodo aux;
+	T aux;
 	for (int i = this.getArbol().size() -1; i >= 1 ; i/=2) {
 	 	if(this.getArbol().get(i).compareTo(this.getArbol().get(i/2)) > 0){
 	 		aux = this.getArbol().get(i);
@@ -24,13 +27,13 @@ public void reordenarInsert(){
 }
 	
 
-   public Nodo sacar(){
+   public T sacar(){
 	   
 	   //No hay nada en la cola
 	   if(this.getArbol().size() == 0)
-		   return new Nodo(0,0);
+		   return null;
 	   
-	   Nodo retorno = this.getArbol().get(0);
+	   T retorno = this.getArbol().get(0);
 		    this.ingresarValor(this.getArbol().get(this.getArbol().size()-1), 0);
 		    this.getArbol().remove(this.getArbol().size()-1);
 		    reordenarSacar();    
@@ -39,8 +42,9 @@ public void reordenarInsert(){
 	   return retorno;
    }
    
+   @SuppressWarnings("unchecked") 
    public void reordenarSacar(){
-		Nodo aux;
+		T aux;
 		for (int i = 0; i < this.getArbol().size(); i*=2) {
 		    if((i*2+1) < this.getArbol().size()  && this.getArbol().get(i*2+1).compareTo(this.getArbol().get(i*2)) > 0){
 		    	
@@ -61,27 +65,22 @@ public void reordenarInsert(){
   }
    
 	
-   public void ingresarValor(Nodo valor) {
+   public void ingresarValor(T valor) {
 	   
 	   this.arbol.add(valor);
    }
    
-   public void ingresarValor(Nodo valor, int posicion) {
+   public void ingresarValor(T valor, int posicion) {
 	   
 	   this.arbol.set(posicion, valor);
    }
 
-   public static  ArrayList<Nodo> initArray(){
-		 ArrayList<Nodo> retorno = new ArrayList<Nodo>();
-		 retorno.add(new Nodo(0,0));
-		 
-		 return retorno;
-	 }
-	public MonticuloDin() {
-		this(0,new ArrayList<Nodo>());
+ 
+	public MonticuloGen() {
+		this(0,new ArrayList<T>());
 	}
 	
-	public MonticuloDin(int tope, ArrayList<Nodo> arbol) {
+	public MonticuloGen(int tope, ArrayList<T> arbol) {
 		super();
 		this.tope = tope;
 		this.arbol = arbol;
@@ -92,14 +91,14 @@ public void reordenarInsert(){
 	public void setTope(int tope) {
 		this.tope = tope;
 	}
-	public ArrayList<Nodo> getArbol() {
+	public ArrayList<T> getArbol() {
 		return arbol;
 	}
 	
-	public void setArbol(ArrayList<Nodo> arbol) {
+	public void setArbol(ArrayList<T> arbol) {
 		this.arbol = arbol;
 	}
 	private int tope;
-	private ArrayList<Nodo> arbol;
+	private ArrayList<T> arbol;
 
 }

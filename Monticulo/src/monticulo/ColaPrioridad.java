@@ -7,7 +7,7 @@ public void insertar(Nodo nodo) {
 	this.getMonticulo().agregar(nodo);
 }
 	
-public void sacar(Nodo nodo) {
+public void sacar() {
 	this.getMonticulo().sacar();
 }
 public ColaPrioridad() {

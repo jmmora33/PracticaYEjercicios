@@ -1,7 +1,5 @@
 package monticulo;
 
-import java.util.*;
-
 public class Nodo implements Comparable<Nodo> {
 
 	private int prioridad;
@@ -37,7 +35,9 @@ public class Nodo implements Comparable<Nodo> {
 	
 	@Override
 	public int compareTo(Nodo nodo) {
-		return this.getPrioridad()-nodo.getPrioridad();
+		
+		
+		return this.getPrioridad() < nodo.getPrioridad()?1:this.getPrioridad() > nodo.getPrioridad() ?-1:0;
 	}
 
 	
