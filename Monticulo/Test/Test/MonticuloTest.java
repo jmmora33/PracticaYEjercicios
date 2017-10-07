@@ -24,4 +24,6 @@ public class MonticuloTest {
 		for(int i = 1 ; i <= monticulo.getTope(); i++)
 			System.out.println(monticulo.getVector()[i]);
 	}
+	
+
 }
