@@ -37,4 +37,9 @@ public class Deposito {
 	public int getVolumen (int altura) {
 		return altura*superficie;
 	}
+	
+	public int getHRelativo(Deposito depo) {
+		return this.altura - depo.getAltura();
+	}
+
 }
