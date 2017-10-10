@@ -1,0 +1,43 @@
+numero(4).
+numero(2).
+numero(3).
+%   ! operador de corte. Encuentra exito en la primer combinacion,
+%   corta.
+terna(X,Y,Z):-numero(X),numero(Y),!,numero(Z).
+
+
+multiplicar(P,X,Y):- P is X*Y.
+funcion(X,Y):- X<0,multiplicar(Y,X,-1);
+               X=0,multiplicar(Y,X,0);
+               X>0,multiplicar(Y,X,1).
+
+funcion1(X,Y):-X<0, Y is -1*X,!.
+funcion1(0,Y):-Y=0,!.
+funcion1(X,Y):-X>0, Y is X.
+
+
+%Buscar el mayor
+producto(X,Y):-numero(X),numero(Y).
+seleccion(X,Y):-producto(X,Y),X<Y.
+proyeccion(X):-seleccion(X,_).
+max(X):-numero(X), not(proyeccion(X)).
+%max(X),write(X),nl,fail.
+
+producto2(X,Y):-numero(X),numero(Y).
+seleccion2(X,Y):-producto2(X,Y),X>Y.
+proyeccion2(X):-seleccion2(X,_).
+min(X):-numero(X), not(proyeccion2(X)).
+
+ventas(enero,1342).
+ventas(febrero,4231).
+ventas(marzo,5121).
+ventas(abril,5121).
+
+producto3(X,Y):-ventas(_,X),ventas(_,Y).
+seleccion3(X,Y):-producto3(X,Y),X<Y.
+proyeccion3(X):-seleccion3(X,_).
+max3(Mes,X):-ventas(Mes,X),not(proyeccion3(X)).
+
+
+
+

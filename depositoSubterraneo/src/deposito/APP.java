@@ -14,7 +14,7 @@ public class APP {
 		Scanner sc = new Scanner(new File(archivoEntrada));
 		PrintWriter salida = new PrintWriter(new File(archivoSalida));
 		/* VOLUMEN TOTAL */
-		int volumenTotal = 0;
+		int volumenAIngresar = 0;
 		/* CANTIDAD DE DEPOSITOS EXISTENTES */
 		int cantidadDeDepositos = sc.nextInt();
 		/* VARIABLE QUE VA A CONTENER A LOS DEPOSITOS */
@@ -23,7 +23,13 @@ public class APP {
 		ArrayList<Deposito> depositos = new ArrayList<Deposito>();
 		/* VOLUMEN TOTAL EN LOS DEPOSITOS */
 		int volumenDepositos = 0;
-
+		/* PROG DIN */
+		int[][] matValores;
+		int[] cantidadPorNivel;
+		/* INDICES */
+		int index = 1;
+		int nivel = 0;
+		int alturaSobrante = 0;
 		/* CARGA DE DEPOSITOS */
 		for (int i = 0; i < cantidadDeDepositos; i++) {
 			deposito = new Deposito();
@@ -31,71 +37,109 @@ public class APP {
 			deposito.setAltura(sc.nextInt());
 			depositos.add(deposito);
 		}
-
-		volumenTotal = sc.nextInt();
+		/* VOLUMEN A INGRESAR A LOS DEPOSITOS */
+		volumenAIngresar = sc.nextInt();
+		/* ALTURA QUE SOBRA INICIALMENTE */
+		alturaSobrante = depositos.get(0).getAltura();
+		/** SE INICIALIZA LA MATRIZ CON LOS VALORES **/
+		matValores = new int[cantidadDeDepositos][depositos.get(0).getAltura()];
+		/** SE INICIALIZA EL VECTOR CANTIDAD POR NIVEL CON LOS VALORES **/
+		cantidadPorNivel = new int[depositos.get(0).getAltura()];
 		/* SE CIERRA EL SCANNER */
 		sc.close();
 
-		/* SE CONOCE EL VOLUMEN TOTAL */
-		for (Deposito deposito2 : depositos)
-			volumenDepositos += deposito2.getVolumen();
+		/* CARGO LA MATRIZ DE VALORES POR METRO 3 */
 
-		/* SI EL VOLUMEN TOTAL ES MAYOR A TODOS LOS DEPOSITOS->REBALSA */
-		if (volumenTotal > volumenDepositos) {
-			volumenTotal -= volumenDepositos;
-			salida.println("Rebalsa:" + volumenTotal);
-			salida.close();
-		} else {
-			int index = 0;
-			int j = 0;
-			int cantDepositosIguales = 0; // CAntidad de repeticiones y no de depositos
-			int alturaRel = 0;
-			int sumaSup = 0;
-			int sumaVol = 0;
-			int alturaSobrante = depositos.get(0).getAltura();
-			
-			while (volumenTotal > 0 && index < cantidadDeDepositos) {
-				if (index + 1 < cantidadDeDepositos
-						&& depositos.get(index).getAltura() != depositos.get(index + 1).getAltura()) {
-					alturaRel = depositos.get(index).getAltura() - depositos.get(index + 1).getAltura();
-					for (int i = 0; j <= index; i++) 
-						volumenTotal -= depositos.get(j).getVolumen(alturaRel);
-			
-					alturaSobrante -= alturaRel;
-					index++;
-				} else {
-					while (index + cantDepositosIguales + 1 < cantidadDeDepositos
-							&& depositos.get(index + cantDepositosIguales).getAltura() == depositos
-									.get(index + cantDepositosIguales + 1).getAltura())
-						cantDepositosIguales++;
-
-					if (index + cantDepositosIguales + 1 >= cantidadDeDepositos) {
-						while (index < cantidadDeDepositos) {
-							sumaSup = depositos.get(index).getSuperficie();
-							index++;
-						}
-
-						volumenTotal -= sumaSup * depositos.get(index - 1).getAltura();
-						alturaSobrante -= depositos.get(index - 1).getAltura();
-					} else {
-						alturaRel = depositos.get(index).getAltura()
-								- depositos.get(index + cantDepositosIguales + 1).getAltura();
-						while (index < cantidadDeDepositos) {
-							sumaVol += depositos.get(index).getSuperficie() * alturaRel;
-							index++;
-
-							alturaSobrante -= alturaRel;
-						}
-
-						volumenTotal -= sumaVol;
-					}
-				}
-
+		for (int i = 0; i < depositos.size(); i++) {
+			int m = 0;
+			for (int j = depositos.size() - 1; j >= depositos.size() - depositos.get(i).getAltura(); j--) {
+				matValores[i][j] = depositos.get(i).getVolumen(1) * (depositos.get(i).getAltura() - m);
+				m++;
 			}
-			salida.println(index);
-			salida.println(alturaSobrante);
+
 		}
+		/** CARGO VECTOR CON CANTIDAD DE DEPOSITOS POR NIVEL */
+
+		for (int j = 0; j < cantidadPorNivel.length; j++) {
+
+			while (nivel < depositos.size() && matValores[nivel][j] != 0)
+				nivel++;
+			if (nivel < depositos.size())
+				cantidadPorNivel[j] = nivel;
+			else
+				cantidadPorNivel[j] = nivel + 1;
+			nivel = 0;
+		}
+		/* SI EL VOLUMEN TOTAL ES MAYOR A TODOS LOS DEPOSITOS->REBALSA */
+		if (volumenAIngresar > sumoNivel(matValores, depositos.get(0).getAltura())) {
+			volumenAIngresar -= volumenDepositos;
+			salida.println("Rebalsa:" + volumenAIngresar);
+			salida.close();
+		} else {// AQUI VA LO COMENTADO FUERA DE LA CLASE
+
+			while (volumenAIngresar > 0) {
+				sumoNivel(matValores, index);
+				alturaSobrante -= 1;
+			}
+
+			salida.println("cantidadUsado:" + volumenAIngresar);
+			salida.println("Altura:" + alturaSobrante);
+		}
+
 		salida.close();
 	}
 
+	public static int sumoNivel(int[][] mat, int nivel) {
+		int resultado = 0;
+		int i = 0;
+		while (i < mat.length && mat[i][nivel] != 0) {
+			resultado += mat[i][nivel];
+			i++;
+		}
+		return resultado;
+	}
+
 }
+/* MIENTRAS EXISTA VOLUMEN Y HAYA DEPOSITOS */
+// while (volumenAIngresar > 0 && index < cantidadDeDepositos) {
+//
+// /*Caso1: Son diferente altura*/
+// if (index + 1 < cantidadDeDepositos
+
+// && depositos.get(index).getAltura() != depositos.get(index + 1).getAltura())
+// {
+// alturaRel = depositos.get(index).getAltura() - depositos.get(index +
+// 1).getAltura();
+// for (int j = 0; j <= index; j++)
+// volumenAIngresar -= depositos.get(j).getVolumen(alturaRel);
+// alturaSobrante -= alturaRel;
+// index++;
+// } else {
+// /*Caso2: con alturas iguales*/
+// /*Cuento cuantos depos con la misma altura tengo*/
+// while (index + cantDepoIgualAltura + 1 < cantidadDeDepositos
+// && depositos.get(index + cantDepoIgualAltura).getAltura() == depositos
+// .get(index + cantDepoIgualAltura + 1).getAltura())
+// cantDepoIgualAltura++;
+// /*SI TODOS LOS DEPOSITOS QUE QUEDAN SON IGUALES*/
+// if (index + cantDepoIgualAltura + 1 >= cantidadDeDepositos) {
+// while (index < cantidadDeDepositos) {
+// sumaSup = depositos.get(index).getSuperficie();
+// index++;
+// }
+//
+// volumenAIngresar -= sumaSup * depositos.get(index - 1).getAltura();
+// alturaSobrante -= depositos.get(index - 1).getAltura();
+// } else {
+// alturaRel = depositos.get(index).getAltura()
+// - depositos.get(index + cantDepoIgualAltura + 1).getAltura();
+// for (int i = 0; i <= cantDepoIgualAltura; i++) {
+// sumaVol += depositos.get(index).getSuperficie() * alturaRel;
+// alturaSobrante -= alturaRel;
+// index++;
+// }
+// volumenAIngresar -= sumaVol;
+// }
+// }
+//
+// }
