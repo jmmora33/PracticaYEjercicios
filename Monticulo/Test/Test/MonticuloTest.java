@@ -25,5 +25,13 @@ public class MonticuloTest {
 			System.out.println(monticulo.getVector()[i]);
 	}
 	
+	@Test
+	public void testSacar() {
+		int[] vector ={0,15,9,8,4,6,1};
+		Monticulo monticulo = new Monticulo(vector);
+		
+		assertEquals(monticulo.sacar(), 15);
+
+	}
 
 }

@@ -8,7 +8,7 @@ public class ColaPrioriGen<T> {
 //		this.getMonticulo().agregar(elemento);
 	}
 	public void sacar(Nodo nodo) {
-		this.getMonticulo().sacar();
+		this.monticulo.sacar();
 	}
 	
 	public ColaPrioriGen() {
@@ -32,12 +32,11 @@ public class ColaPrioriGen<T> {
 		public void setUltimo(int ultimo) {
 			this.ultimo = ultimo;
 		}
-		public MonticuloGen<?> getMonticulo() {
-			return monticulo;
-		}
+		
 		public void setMonticulo(MonticuloGen<?> monticulo) {
 			this.monticulo = monticulo;
 		}
+		
 	private int primero;
 	private int ultimo;
 	private MonticuloGen<?> monticulo; 
