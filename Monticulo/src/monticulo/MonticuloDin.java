@@ -102,6 +102,10 @@ public class MonticuloDin {
 		this.arbol = arbol;
 	}
 
+	public ArrayList<Nodo> getArbol() {
+		return arbol;
+	}
+
 	private int tope;
 	private ArrayList<Nodo> arbol;
 

@@ -37,6 +37,10 @@ public class ColaPrioriGen<T> {
 			this.monticulo = monticulo;
 		}
 		
+	public MonticuloGen<?> getMonticulo() {
+			return monticulo;
+		}
+
 	private int primero;
 	private int ultimo;
 	private MonticuloGen<?> monticulo; 
