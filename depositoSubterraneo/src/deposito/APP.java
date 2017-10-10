@@ -21,13 +21,10 @@ public class APP {
 		Deposito deposito;
 		/* LISTA DE DE DEPOSITOS */
 		ArrayList<Deposito> depositos = new ArrayList<Deposito>();
-		/* VOLUMEN TOTAL EN LOS DEPOSITOS */
-		int volumenDepositos = 0;
 		/* PROG DIN */
 		int[][] matValores;
 		int[] cantidadPorNivel;
 		/* INDICES */
-		int index = 1;
 		int nivel = 0;
 		int alturaSobrante = 0;
 		/* CARGA DE DEPOSITOS */
@@ -64,25 +61,26 @@ public class APP {
 
 			while (nivel < depositos.size() && matValores[nivel][j] != 0)
 				nivel++;
-			if (nivel < depositos.size())
-				cantidadPorNivel[j] = nivel;
-			else
-				cantidadPorNivel[j] = nivel + 1;
+	
+			cantidadPorNivel[j] = nivel;
 			nivel = 0;
 		}
 		/* SI EL VOLUMEN TOTAL ES MAYOR A TODOS LOS DEPOSITOS->REBALSA */
-		if (volumenAIngresar > sumoNivel(matValores, depositos.get(0).getAltura())) {
-			volumenAIngresar -= volumenDepositos;
-			salida.println("Rebalsa:" + volumenAIngresar);
+		if (volumenAIngresar > sumoNivel(matValores, depositos.get(0).getAltura()-1)) {
+			volumenAIngresar -= sumoNivel(matValores, depositos.get(0).getAltura()-1);
+			salida.println("Rebalsa:" + volumenAIngresar );
 			salida.close();
 		} else {// AQUI VA LO COMENTADO FUERA DE LA CLASE
-
-			while (volumenAIngresar > 0) {
-				sumoNivel(matValores, index);
+        
+			
+			nivel = 0;
+			while (nivel < matValores.length && volumenAIngresar > 0 ) {
+				volumenAIngresar -= sumoNivel(matValores, nivel);
 				alturaSobrante -= 1;
+				nivel ++;
 			}
-
-			salida.println("cantidadUsado:" + volumenAIngresar);
+            
+			salida.println("cantidadDepositosUsado:" + cantidadPorNivel[nivel-1]);
 			salida.println("Altura:" + alturaSobrante);
 		}
 
