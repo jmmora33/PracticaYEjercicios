@@ -29,7 +29,7 @@ public class MonticuloDin {
 		if (this.arbol.size() == 0)
 			return new Nodo(0, 0);
 
-		Nodo retorno = this.getArbol().get(0);
+		Nodo retorno = this.arbol().get(0);
 		this.ingresarValor(this.arbol.get(this.arbol.size() - 1), 0);
 		this.arbol.remove(this.arbol.size() - 1);
 		reordenarSacar();
@@ -39,20 +39,20 @@ public class MonticuloDin {
 
 	public void reordenarSacar() {
 		Nodo aux;
-		for (int i = 0; i < this.getArbol().size(); i *= 2) {
-			if ((i * 2 + 1) < this.getArbol().size()
-					&& this.getArbol().get(i * 2 + 1).compareTo(this.getArbol().get(i * 2)) > 0) {
+		for (int i = 0; i < this.arbol.size(); i *= 2) {
+			if ((i * 2 + 1) < this.arbol.size()
+					&& this.arbol().get(i * 2 + 1).compareTo(this.arbol().get(i * 2)) > 0) {
 
-				if (this.getArbol().get(i).compareTo(this.getArbol().get(i * 2 + 1)) < 0) {
-					aux = this.getArbol().get(i);
-					this.ingresarValor(this.getArbol().get(i * 2 + 1), i);
+				if (this.arbol.get(i).compareTo(this.arbol.get(i * 2 + 1)) < 0) {
+					aux = this.arbol().get(i);
+					this.ingresarValor(this.arbol.get(i * 2 + 1), i);
 					this.ingresarValor(aux, i * 2 + 1);
 				} else
 					break;
-			} else if (i * 2 < this.getArbol().size()
-					&& this.getArbol().get(i).compareTo(this.getArbol().get(i * 2)) < 0) {
-				aux = this.getArbol().get(i);
-				this.ingresarValor(this.getArbol().get(i * 2 + 1), i);
+			} else if (i * 2 < this.arbol().size()
+					&& this.arbol.get(i).compareTo(this.arbol.get(i * 2)) < 0) {
+				aux = this.arbol.get(i);
+				this.ingresarValor(this.arbol.get(i * 2 + 1), i);
 				this.ingresarValor(aux, i * 2 + 1);
 			} else
 				break;
@@ -94,7 +94,7 @@ public class MonticuloDin {
 		this.tope = tope;
 	}
 
-	public ArrayList<Nodo> getArbol() {
+	public ArrayList<Nodo> arbol() {
 		return arbol;
 	}
 
