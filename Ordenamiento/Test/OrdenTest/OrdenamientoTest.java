@@ -28,7 +28,7 @@ public class OrdenamientoTest {
 	}
 
 	@Test
-	public void InsercionTest() {
+	public void insercionTest() {
 
 		long start = System.nanoTime();
 		// Persona[] resultado = {new Persona("Juan",10),new
@@ -42,7 +42,7 @@ public class OrdenamientoTest {
 	}
 
 	@Test
-	public void SeleccionTest() {
+	public void seleccionTest() {
 		long start = System.nanoTime();
 		// Persona[] resultado = {new Persona("Juan",10),new
 		// Persona("Juan",12),new Persona("Juan",18),new Persona("Juan",22),new
@@ -55,7 +55,7 @@ public class OrdenamientoTest {
 	}
 
 	@Test
-	public void ShellTest() {
+	public void shellTest() {
 		long start = System.nanoTime();
 		// Persona[] resultado = {new Persona("Juan",10),new
 		// Persona("Juan",12),new Persona("Juan",18),new Persona("Juan",22),new
@@ -67,7 +67,7 @@ public class OrdenamientoTest {
 	}
 
 	@Test
-	public void QuickSortTest() {
+	public void quickSortTest() {
 		long start = System.nanoTime();
 		// Persona[] resultado = {new Persona("Juan",10),new
 		// Persona("Juan",12),new Persona("Juan",18),new Persona("Juan",22),new
@@ -76,5 +76,16 @@ public class OrdenamientoTest {
 		long finish = System.nanoTime() - start;
 		Assert.assertTrue(personas[0].getEdad() == 10 && personas[1].getEdad() == 12);
 		System.out.println("QuickSort=" + finish);
+	}
+	
+	@Test
+	public void mergeTest(){
+		long start = System.nanoTime();
+		int[] vec = {1,4,8,2,9,10,3,5,7,6};
+		int[] resultado = {1,2,3,4,5,6,7,8,9};
+		ordenes.sort(vec);
+		long finish = System.nanoTime() - start;
+		Assert.assertEquals(resultado, vec);
+		System.out.println("Shell=" + finish);
 	}
 }

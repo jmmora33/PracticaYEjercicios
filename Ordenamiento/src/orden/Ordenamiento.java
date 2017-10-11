@@ -60,8 +60,50 @@ public class Ordenamiento<T extends Comparable> {
 
 		}
 	}
-
-	public void quickSort(T[] arreglo) {
+//PARA ENTEROS NO ES GENERICO
+	public void sort(int[] arreglo){
+	 if(arreglo.length == 1)
+		 return;
+	 int medio = arreglo.length /2 ;
+	 int[] parte1 = new int[medio];
+	 int[] parte2 = new int[arreglo.length - medio];
+	 
+	 
+	 for (int i = 0; i < arreglo.length; i++) {
+		if(i < medio)
+			parte1[i] = arreglo[i];
+		else
+			parte2[i-medio] =arreglo[i]; 
+			
+		sort(parte1);
+		sort(parte2);
+		merge(parte1,parte2,arreglo);
+		
+	}
+	}
+	
+	private void merge(int[] parte1, int[] parte2, int[] resultado){
+		int index1 = 0 ; 
+		int index2 = 0;
+		
+		for (int i = 0; i < resultado.length; i++) {
+			
+			if(index1 == parte1.length){
+				resultado[i] = parte2[index2];
+				index2 ++;
+			}else if(index2 == parte2.length){
+				resultado[i] = parte1[index1];
+				index1++;
+			}else if(parte1[index1] < parte2[index2]){
+				resultado[i] = parte1[index1];
+				index1 ++;
+			}else{
+				resultado[i] = parte2[index2];
+				index2 ++;
+			}
+		}
+	}
+		public void quickSort(T[] arreglo) {
 
 		arreglo = quickSortRecu(arreglo, 0, arreglo.length - 1);
 	}
