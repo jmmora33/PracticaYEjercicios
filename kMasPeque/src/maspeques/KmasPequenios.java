@@ -11,7 +11,7 @@ public class KmasPequenios {
 	public static void main(String[] args) throws IOException {
 			int cantEnteros;
 			int cantPequenios;
-			
+			long time = System.currentTimeMillis();
 			TreeSet<Integer> enteros = new TreeSet<Integer>();
 
 			String t="KPeque.in";
@@ -31,6 +31,9 @@ public class KmasPequenios {
 				enteros.remove(enteros.first());
 			}
 			s.close();
+
+			long end = System.currentTimeMillis() - time;
+			System.out.println(end);
 	}
 	
 }

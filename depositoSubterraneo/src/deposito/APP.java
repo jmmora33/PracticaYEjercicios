@@ -30,6 +30,7 @@ public class APP {
 		int nivel = 0;
 		int alturaSobrante = 0;
 		
+		long time = System.currentTimeMillis();
 		/* CARGA DE DEPOSITOS O(N) */
 		for (int i = 0; i < cantidadDeDepositos; i++) {
 			deposito = new Deposito();
@@ -95,6 +96,9 @@ public class APP {
 		}
 
 		salida.close();
+		long end = System.currentTimeMillis() - time;
+		
+		System.out.println(end);
 	}
 
 	public static int sumoNivel(int[][] mat, int nivel) {
@@ -108,46 +112,3 @@ public class APP {
 	}
 
 }
-/* MIENTRAS EXISTA VOLUMEN Y HAYA DEPOSITOS */
-// while (volumenAIngresar > 0 && index < cantidadDeDepositos) {
-//
-// /*Caso1: Son diferente altura*/
-// if (index + 1 < cantidadDeDepositos
-
-// && depositos.get(index).getAltura() != depositos.get(index + 1).getAltura())
-// {
-// alturaRel = depositos.get(index).getAltura() - depositos.get(index +
-// 1).getAltura();
-// for (int j = 0; j <= index; j++)
-// volumenAIngresar -= depositos.get(j).getVolumen(alturaRel);
-// alturaSobrante -= alturaRel;
-// index++;
-// } else {
-// /*Caso2: con alturas iguales*/
-// /*Cuento cuantos depos con la misma altura tengo*/
-// while (index + cantDepoIgualAltura + 1 < cantidadDeDepositos
-// && depositos.get(index + cantDepoIgualAltura).getAltura() == depositos
-// .get(index + cantDepoIgualAltura + 1).getAltura())
-// cantDepoIgualAltura++;
-// /*SI TODOS LOS DEPOSITOS QUE QUEDAN SON IGUALES*/
-// if (index + cantDepoIgualAltura + 1 >= cantidadDeDepositos) {
-// while (index < cantidadDeDepositos) {
-// sumaSup = depositos.get(index).getSuperficie();
-// index++;
-// }
-//
-// volumenAIngresar -= sumaSup * depositos.get(index - 1).getAltura();
-// alturaSobrante -= depositos.get(index - 1).getAltura();
-// } else {
-// alturaRel = depositos.get(index).getAltura()
-// - depositos.get(index + cantDepoIgualAltura + 1).getAltura();
-// for (int i = 0; i <= cantDepoIgualAltura; i++) {
-// sumaVol += depositos.get(index).getSuperficie() * alturaRel;
-// alturaSobrante -= alturaRel;
-// index++;
-// }
-// volumenAIngresar -= sumaVol;
-// }
-// }
-//
-// }
