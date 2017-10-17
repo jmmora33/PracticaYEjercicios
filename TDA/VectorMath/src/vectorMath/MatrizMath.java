@@ -9,11 +9,11 @@ public class MatrizMath {
 
 
 	public double obtenerValor(int numFila, int numCol) {
-		return this.getMat()[numFila-1][numCol-1];
+		return this.getMat()[numFila ][numCol ];
 	}
 	
 	public void setearValor(int numFila, int numCol, double valor) {
-		this.mat[numFila -1][numCol -1] = valor;
+		this.mat[numFila ][numCol ] = valor;
 	}
 	
 	public VectorMath obtenerFila(int index) {
@@ -69,6 +69,13 @@ public class MatrizMath {
 	   return this.mat.length;
    }
 	
+   
+   public void mostrarMat() {
+	   for (int i = 0; i < mat.length; i++) 
+		for (int j = 0; j < mat.length; j++) 
+			System.out.print(this.mat[i][j]);
+	 System.out.println();
+   }
 	public MatrizMath(String path) throws FileNotFoundException
 	{
 	    this.sc = new Scanner(new File(path));
